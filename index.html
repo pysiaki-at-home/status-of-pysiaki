@@ -1,0 +1,64 @@
+<div>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  const DATA_COUNT = 12;
+  const labels = [];
+  for (let i = 0; i < DATA_COUNT; ++i) {
+    labels.push((i*2).toString());
+  }
+  const datapoints = [0, 20, 20, 60, 60, 120, 1];
+  const data = {
+    labels: labels,
+    datasets: [
+    {
+      label: 'Temperatura',
+      data: datapoints,
+      borderColor: '#D8973C',
+      fill: false,
+      tension: 0.4
+    }
+    ]
+  };
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Temperatura u Pysiaków'
+        },
+      },
+      interaction: {
+        intersect: false,
+      },
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true
+          }
+        },
+        y: {
+          display: true,
+          title: {
+            display: true,
+            text: '°C'
+          },
+        // suggestedMin: -10,
+          suggestedMax: 200
+        }
+      }
+    },
+  };
+
+  new Chart(ctx, config);
+</script>
