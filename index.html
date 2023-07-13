@@ -15,12 +15,14 @@
     const parsed_data = raw_data.split("\n").filter(Boolean);
 
     const labels = [];
-    const datapoints = [];
+    const temperatures = [];
+    const humidities = [];
 
     for (let i = 0; i < parsed_data.length; ++i) {
       const splitted = parsed_data[i].split(';');
       labels.push(splitted[0]);
-      datapoints.push(splitted[1]);
+      temperatures.push(splitted[1]);
+      humidities.push(splitted[2]);
     }  
 
     const data = {
@@ -28,10 +30,19 @@
       datasets: [
       {
         label: 'Temperatura',
-        data: datapoints,
+        data: temperatures,
         borderColor: '#D8973C',
         fill: false,
-        tension: 0.4
+        tension: 0.4,
+        yAxisID: 'y',
+      },
+      {
+        label: 'Wilgotność',
+        data: humidities,
+        borderColor: 'lightblue',
+        fill: false,
+        tension: 0.4,
+        yAxisID: 'y2',
       }
       ]
     };
@@ -58,14 +69,30 @@
             }
           },
           y: {
+            type: 'linear',
             display: true,
             title: {
               display: true,
               text: '°C'
             },
             suggestedMin: 0,
+            position: 'left',
           // suggestedMax: 200
-          }
+          },
+          y2: {
+            type: 'linear',
+            display: true,
+            title: {
+              display: true,
+              text: '% Wilgotności'
+            },
+            suggestedMin: 0,
+            position: 'right',
+            // suggestedMax: 200
+            grid: {
+              drawOnChartArea: false, // only want the grid lines for one axis to show up
+            },
+          },
         }
       },
     };
