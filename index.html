@@ -10,7 +10,7 @@
 <script>
   (async () => {
     const ctx = document.getElementById('myChart');
-    const response = await fetch('./data.txt', {cache: "no-store"});
+    const response = await fetch('./compacted_data.txt', {cache: "no-store"});
     const raw_data = await response.text();
     const parsed_data = raw_data.split("\n").filter(Boolean);
 
